@@ -8,7 +8,7 @@ on disk. Passwords are never written to a file.
     ./scripts/deploy.py up -d                  # pull and start
     ./scripts/deploy.py up -d --tag sha-abc1234
     ./scripts/deploy.py up -d --build          # build on the VM instead
-    ./scripts/deploy.py logs -f app
+    ./scripts/deploy.py logs -f iva
     ./scripts/deploy.py ps
 
 Requires, when pulling a private image:
@@ -132,7 +132,7 @@ def main() -> None:
 
     try:
         if needs_pull and "up" in docker_args:
-            pull = ["docker", "compose", *COMPOSE_FILES, "pull", "app"]
+            pull = ["docker", "compose", *COMPOSE_FILES, "pull", "iva"]
             print(f"\nPulling image (tag: {args.tag})...", file=sys.stderr)
             print(f"Running: {' '.join(pull)}", file=sys.stderr)
             pulled = subprocess.run(pull, env=env)
@@ -141,8 +141,11 @@ def main() -> None:
                 sys.exit(pulled.returncode)
 
         command = ["docker", "compose", *COMPOSE_FILES, *docker_args]
-        if args.build and "up" in docker_args and "--build" not in docker_args:
-            command.append("--build")
+        if "up" in docker_args:
+            if "--remove-orphans" not in docker_args:
+                command.append("--remove-orphans")
+            if args.build and "--build" not in docker_args:
+                command.append("--build")
         print(f"\nRunning: {' '.join(command)}", file=sys.stderr)
         result = subprocess.run(command, env=env)
     finally:

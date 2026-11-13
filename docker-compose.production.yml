@@ -4,9 +4,14 @@
 # app's Caddy already owns those ports on the VM. This service joins the
 # external network `edge` so that Caddy can proxy iva.eduardomotta.dev
 # to the container name iva-app.
+#
+# IMPORTANT: The service is named `iva`, not `app`, to avoid a DNS alias
+# collision. The shared `edge` network is used by other compose projects on
+# this VM. A generic name like `app` would shadow containers from those
+# projects. See the safety check in remote-deploy.sh.
 
 services:
-  app:
+  iva:
     image: ghcr.io/e-motta/tax-reform-calc:${APP_IMAGE_TAG:-latest}
     container_name: iva-app
     environment:

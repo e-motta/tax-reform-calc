@@ -189,7 +189,7 @@ Rollback:
 Logs from this stack only:
 
 ```bash
-./scripts/deploy.py logs -f app
+./scripts/deploy.py logs -f iva
 tail -f /opt/tax-reform-calc/deploy-history.log
 ```
 
@@ -199,6 +199,7 @@ tail -f /opt/tax-reform-calc/deploy-history.log
 - Do not publish Postgres, and do not add a second Caddy on 80 or 443.
 - Do not put the IVA site block in a commit on the finance repository from this app. The reattach script is the seam.
 - The finance Caddyfile's own site block stays the one that repository ships. The script only appends, and only when the marker is absent.
+- **Do not use generic service names on the shared `edge` network.** The compose service must be named `iva`, not `app`. Docker Compose automatically adds a DNS alias for the service name on every network the container joins. A generic name like `app` would shadow other projects' containers. The deploy script checks for this and rolls back if it detects a collision. If renaming the service, remember to update `deploy.py`, `remote-deploy.sh`, and the docs.
 
 ## Local compose is a different file
 

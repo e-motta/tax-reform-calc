@@ -5,7 +5,7 @@
 name: iva
 
 services:
-  app:
+  iva:
     build: .
     restart: unless-stopped
     ports:
