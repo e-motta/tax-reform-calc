@@ -38,7 +38,8 @@ async function submit(event) {
     showFormError(text.issRateError);
     return;
   }
-  const { ok, body } = await calculate(getFormValues());
+  const formValues = getFormValues();
+  const { ok, body } = await calculate(formValues);
   if (!ok) {
     const detail = body.detail;
     const message = detail && detail[state.lang === "pt" ? "message_pt" : "message_en"];
@@ -48,6 +49,15 @@ async function submit(event) {
   }
   state.result = body;
   renderResult();
+  try {
+    window.umami?.track("calculate", {
+      category: formValues.category_id,
+      state: formValues.origin_uf,
+      regime: formValues.regime,
+    });
+  } catch {
+    // Ignore if analytics is blocked
+  }
 }
 
 initThemeToggle(render);
