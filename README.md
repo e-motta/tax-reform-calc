@@ -8,7 +8,7 @@ Eduardo de Moraes, a tax lawyer who now works as a senior backend engineer, keep
 
 ## The page
 
-English is the default. Portuguese is a toggle, and so is a dark theme. The heading is the comparison: ICMS, PIS and COFINS struck through, then IVA, which is CBS plus IBS. The yellow note is the estimate disclosure: the date, the pair of rates the arithmetic uses, and the TCU figure it does not use.
+English is the default. Portuguese is a toggle, and so is a dark theme. The heading is the comparison: ICMS, PIS and COFINS as muted chips, then IVA, which is CBS plus IBS. The yellow note is the estimate disclosure: the date, the pair of rates the arithmetic uses, and the TCU figure it does not use.
 
 Standard goods, São Paulo to São Paulo, Lucro Real, R$ 1,000 net.
 

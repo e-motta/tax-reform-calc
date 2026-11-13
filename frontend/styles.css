@@ -55,7 +55,7 @@ body {
 
 .skip:focus { top: 0.8rem; }
 
-.top, .lockup, .lede, .notice, main, .colophon {
+.top, .lockup, .notice, main, .colophon {
   max-width: 1080px;
   margin-left: auto;
   margin-right: auto;
@@ -110,8 +110,6 @@ body {
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--muted);
-  text-decoration: line-through;
-  text-decoration-thickness: 1.5px;
   border: 1px solid var(--line);
   padding: 0.48rem 0.55rem 0.4rem;
 }
@@ -177,12 +175,6 @@ body {
 .theme {
   border: 1px solid var(--line);
   background: var(--card);
-}
-
-.lede {
-  max-width: 62ch;
-  margin: 0.95rem 0 0;
-  font-size: 1.05rem;
 }
 
 .notice {

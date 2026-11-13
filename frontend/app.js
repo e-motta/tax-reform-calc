@@ -3,7 +3,6 @@ const copy = {
     eyebrow: "Brazil · EC 132/2023 · LC 214/2025",
     pageTitle: "ICMS, PIS, COFINS → IVA",
     skip: "Skip to the result",
-    lede: "One supply, priced the way a supplier keeps it. The page grosses up today's taxes, then lays CBS, IBS and the selective tax on top, for every year of the transition.",
     lang: "Language",
     themeLight: "Dark",
     themeDark: "Light",
@@ -80,7 +79,6 @@ const copy = {
     eyebrow: "Brasil · EC 132/2023 · LC 214/2025",
     pageTitle: "ICMS, PIS, COFINS → IVA",
     skip: "Ir para o resultado",
-    lede: "Uma operação, pelo valor que fica com o fornecedor. Os tributos de hoje entram por dentro; CBS, IBS e Imposto Seletivo, por fora, em cada ano da transição.",
     lang: "Idioma",
     themeLight: "Escuro",
     themeDark: "Claro",
@@ -210,7 +208,6 @@ function applyChrome() {
   document.title = text.pageTitle;
   $("skip").textContent = text.skip;
   $("eyebrow").textContent = text.eyebrow;
-  $("lede").textContent = text.lede;
   $("label-category").textContent = text.category;
   $("label-origin").textContent = text.origin;
   $("label-destination").textContent = text.destination;
