@@ -1,0 +1,18 @@
+# Appended to the finance Caddyfile by scripts/reattach-iva.sh.
+# The finance site block stays the one from that repository.
+
+iva.eduardomotta.dev {
+	reverse_proxy iva-app:8000
+
+	encode gzip
+
+	header {
+		-Server
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+	}
+
+	log {
+		output stdout
+		format json
+	}
+}

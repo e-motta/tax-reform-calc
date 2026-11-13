@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IVA transition</title>
+    <meta
+      name="description"
+      content="Compare ICMS, PIS and COFINS with CBS, IBS and the selective tax, year by year from 2026 to 2033."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <a class="skip" id="skip" href="#result">Skip to the result</a>
+    <header class="top">
+      <div class="brand">
+        <p class="mark">IVA</p>
+        <p class="eyebrow" id="eyebrow"></p>
+      </div>
+      <div class="tools">
+        <div class="segmented" role="group" id="lang-switch"></div>
+        <button type="button" class="theme" id="theme"></button>
+      </div>
+    </header>
+
+    <h1 class="lockup">
+      <span class="chips">
+        <span class="chip">ICMS</span>
+        <span class="chip">PIS</span>
+        <span class="chip">COFINS</span>
+      </span>
+      <span class="iva-side">
+        <span class="arrow" aria-hidden="true">→</span>
+        <span class="iva">
+          <span class="iva-name">IVA</span>
+          <span class="iva-eq">CBS + IBS</span>
+        </span>
+      </span>
+    </h1>
+    <aside class="notice" id="notice"></aside>
+
+    <main>
+      <form id="calc" class="panel">
+        <div class="field">
+          <label for="category" id="label-category"></label>
+          <select id="category" name="category" required></select>
+          <p class="hint" id="category-hint"></p>
+        </div>
+        <div class="field">
+          <label for="origin" id="label-origin"></label>
+          <select id="origin" name="origin" required></select>
+        </div>
+        <div class="field">
+          <label for="destination" id="label-destination"></label>
+          <select id="destination" name="destination" required></select>
+        </div>
+        <div class="field">
+          <label for="regime" id="label-regime"></label>
+          <select id="regime" name="regime" required></select>
+        </div>
+        <div class="field">
+          <label for="price" id="label-price"></label>
+          <input id="price" name="price" type="number" inputmode="decimal" min="0.01" step="0.01" value="1000" required />
+          <p class="hint" id="price-hint"></p>
+        </div>
+        <button type="submit" class="go" id="submit"></button>
+        <p class="form-error" id="form-error" hidden></p>
+      </form>
+
+      <section id="result" class="result" aria-live="polite">
+        <p class="waiting" id="waiting"></p>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <p><a id="author-link" href="https://eduardomotta.dev">eduardomotta.dev</a></p>
+    </footer>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

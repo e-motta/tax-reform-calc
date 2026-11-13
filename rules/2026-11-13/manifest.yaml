@@ -1,0 +1,50 @@
+version: "2026-11-13"
+as_of: "2026-11-13"
+currency: BRL
+# The price the user enters is what the supplier keeps before consumption taxes.
+# Legacy "por dentro" taxes are grossed up into the invoice. CBS, IBS and the
+# selective tax are added "por fora": they do not enter their own base
+# (LC 214/2025, art. 12, § 2º, I).
+price_basis: net_before_consumption_taxes
+customer: final_consumer
+goods_origin: domestic
+
+estimates:
+  cbs_reference: "0.0921"
+  ibs_reference: "0.1870"
+  combined_reference: "0.2791"
+  source: >-
+    Senado Notícias, 26 October 2026, reporting the working estimate adopted,
+    without official status, by the Comitê Gestor do IBS: CBS 9.21% and IBS
+    18.70% (combined 27.91%).
+  source_url: >-
+    https://www12.senado.leg.br/noticias/materias/2026/10/26/reforma-tributaria-aliquota-da-cbs-avanca-nesta-semana
+  tcu_cbs_reference: "0.113"
+  tcu_source: >-
+    Tribunal de Contas da União, judgment of 28 October 2026: CBS reference
+    rate of 11.3% sent to the Federal Senate. The Senate had not fixed the
+    rate when this ruleset was written. The 11.3% figure is not used in the
+    arithmetic, because it is a reference for the Senate rather than the rate
+    a standard supply would bear, and it has no paired IBS rate.
+  tcu_source_url: >-
+    https://portal.tcu.gov.br/imprensa/noticias/tcu-calcula-aliquota-de-referencia-de-113-para-novo-tributo-sobre-consumo
+  statutory_review_cap: "0.265"
+  statutory_review_cap_source: >-
+    Lei Complementar nº 214/2025, art. 475, § 11: if the quinquennial review
+    estimates a combined CBS and IBS reference above 26.5%, the Executive must
+    send a bill to bring it back to 26.5% or less. The cap is not itself the
+    rate, and it is not applied in the arithmetic.
+
+sources:
+  lc_214:
+    citation: "Lei Complementar nº 214, de 16 de janeiro de 2025"
+    url: "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm"
+  ec_132:
+    citation: "Emenda Constitucional nº 132, de 20 de dezembro de 2023"
+    url: "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc132.htm"
+  mp_1399:
+    citation: "Medida Provisória nº 1.399, de 4 de novembro de 2026"
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/mpv/mpv1399.htm"
+  senate_resolution_22:
+    citation: "Resolução do Senado Federal nº 22, de 19 de maio de 1989"
+    url: "https://www.planalto.gov.br/ccivil_03/congresso/rsf/rsf22-89.htm"

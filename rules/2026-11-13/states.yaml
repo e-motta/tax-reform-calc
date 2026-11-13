@@ -1,0 +1,180 @@
+# Modal internal ICMS rate of each state: the general rate, not the rate of a
+# product, energy, fuel or communication. Product-specific FCP is not added.
+# A surcharge is included only where the statute applies it to the general rule
+# (Rio de Janeiro FECP and Sergipe FECOEP).
+#
+# Citations were cross-checked on 2026-10-08 against the state statutes named
+# on each row. Confirm a live operation against the current RICMS before using
+# a figure outside this comparison.
+verified_on: "2026-10-08"
+states:
+  - uf: AC
+    name_en: Acre
+    name_pt: Acre
+    region: north
+    internal_rate: "0.19"
+    source: "Lei Complementar nº 55/1997, art. 18, I, as amended by LC nº 422/2022, from 1 April 2023."
+  - uf: AL
+    name_en: Alagoas
+    name_pt: Alagoas
+    region: northeast
+    internal_rate: "0.205"
+    source: "Lei nº 5.900/1996, art. 17, I, 'b', as amended by Lei nº 9.776/2025, from 1 April 2026."
+  - uf: AP
+    name_en: Amapá
+    name_pt: Amapá
+    region: north
+    internal_rate: "0.18"
+    source: "Lei nº 400/1997, art. 37, III, 'i', as amended by Lei nº 1.949/2015, from 1 February 2016."
+  - uf: AM
+    name_en: Amazonas
+    name_pt: Amazonas
+    region: north
+    internal_rate: "0.20"
+    source: "Lei Complementar nº 19/1997, art. 12, I, 'b', as amended by LC nº 244/2023, from 1 April 2023."
+  - uf: BA
+    name_en: Bahia
+    name_pt: Bahia
+    region: northeast
+    internal_rate: "0.205"
+    source: "Lei nº 7.014/1996, art. 15, I, 'a', as amended by Lei nº 14.629/2023, from 7 February 2024."
+  - uf: CE
+    name_en: Ceará
+    name_pt: Ceará
+    region: northeast
+    internal_rate: "0.20"
+    source: "Lei nº 18.665/2023, art. 65, I, 'g'. The 20% modal rate applies from 1 January 2024 (Lei nº 18.305/2023)."
+  - uf: DF
+    name_en: Federal District
+    name_pt: Distrito Federal
+    region: centre_west
+    internal_rate: "0.20"
+    source: "Lei nº 1.254/1996, art. 18, II, 'c', as amended by Lei nº 7.326/2023."
+  - uf: ES
+    name_en: Espírito Santo
+    name_pt: Espírito Santo
+    region: southeast
+    internal_rate: "0.17"
+    source: "Lei nº 7.000/2001, art. 20, I, 'a'."
+  - uf: GO
+    name_en: Goiás
+    name_pt: Goiás
+    region: centre_west
+    internal_rate: "0.19"
+    source: "Lei nº 11.651/1991 (Código Tributário do Estado), art. 27, I, as amended by Lei nº 22.460/2023, from 1 April 2024."
+  - uf: MA
+    name_en: Maranhão
+    name_pt: Maranhão
+    region: northeast
+    internal_rate: "0.23"
+    source: "Lei nº 7.799/2002, art. 23, III, as amended by Lei nº 12.426/2024, from 23 February 2025."
+  - uf: MT
+    name_en: Mato Grosso
+    name_pt: Mato Grosso
+    region: centre_west
+    internal_rate: "0.17"
+    source: "Lei nº 7.098/1998, art. 14, I, 'a'."
+  - uf: MS
+    name_en: Mato Grosso do Sul
+    name_pt: Mato Grosso do Sul
+    region: centre_west
+    internal_rate: "0.17"
+    source: "Lei nº 1.810/1997, art. 41, III, 'a', as amended by Lei nº 3.477/2007."
+  - uf: MG
+    name_en: Minas Gerais
+    name_pt: Minas Gerais
+    region: southeast
+    internal_rate: "0.18"
+    source: "Lei nº 6.763/1975, art. 12, I, 'd', item d.1."
+  - uf: PA
+    name_en: Pará
+    name_pt: Pará
+    region: north
+    internal_rate: "0.19"
+    source: "Lei nº 5.530/1989, art. 12, VII, as amended by Lei nº 9.755/2022, from March 2023."
+  - uf: PB
+    name_en: Paraíba
+    name_pt: Paraíba
+    region: northeast
+    internal_rate: "0.20"
+    source: "Lei nº 6.379/1996, art. 11, I, as amended by Lei nº 12.788/2023, from 1 January 2024."
+  - uf: PR
+    name_en: Paraná
+    name_pt: Paraná
+    region: south
+    internal_rate: "0.195"
+    source: "Lei nº 11.580/1996, art. 14, VIII, as amended by Lei nº 21.850/2023, from 18 March 2024."
+  - uf: PE
+    name_en: Pernambuco
+    name_pt: Pernambuco
+    region: northeast
+    internal_rate: "0.205"
+    source: "Lei nº 15.730/2016, art. 15, VII, as amended by Lei nº 18.305/2023, from 1 January 2024."
+  - uf: PI
+    name_en: Piauí
+    name_pt: Piauí
+    region: northeast
+    internal_rate: "0.225"
+    source: "Lei nº 4.257/1989, art. 23, I, 'c', as amended by Lei nº 8.558/2024, from 1 April 2025."
+  - uf: RJ
+    name_en: Rio de Janeiro
+    name_pt: Rio de Janeiro
+    region: southeast
+    internal_rate: "0.20"
+    source: "Lei nº 2.657/1996, art. 14, I, as amended by Lei nº 10.253/2023, from 20 March 2024."
+    generalized_surcharge:
+      code: fecp
+      rate: "0.02"
+      source: "Lei Complementar estadual nº 210/2023, art. 2º, I. Two extra points for the poverty fund apply to the general rule, so the usual internal burden is 22%."
+  - uf: RN
+    name_en: Rio Grande do Norte
+    name_pt: Rio Grande do Norte
+    region: northeast
+    internal_rate: "0.20"
+    source: "Lei nº 6.968/1996, art. 27, I, 'a', as amended by Lei nº 11.999/2024, from 20 March 2025."
+  - uf: RS
+    name_en: Rio Grande do Sul
+    name_pt: Rio Grande do Sul
+    region: south
+    internal_rate: "0.17"
+    source: "Lei nº 8.820/1989, art. 12, II, 'j'. The modal rate is 17% from 1 January 2022."
+  - uf: RO
+    name_en: Rondônia
+    name_pt: Rondônia
+    region: north
+    internal_rate: "0.195"
+    source: "Lei nº 688/1996, art. 27, I, 'c', as amended by Lei nº 5.634/2023, from 12 January 2024."
+  - uf: RR
+    name_en: Roraima
+    name_pt: Roraima
+    region: north
+    internal_rate: "0.20"
+    source: "Lei nº 59/1993, art. 32, I, 'd', as amended by Lei nº 1.767/2022, from March 2023."
+  - uf: SC
+    name_en: Santa Catarina
+    name_pt: Santa Catarina
+    region: south
+    internal_rate: "0.17"
+    source: "Lei nº 10.297/1996, art. 19, I. Sales to an ICMS taxpayer for resale or manufacture are often 12% (art. 19, III, 'n'); this ruleset models a sale to a final consumer, so it uses 17%."
+  - uf: SP
+    name_en: São Paulo
+    name_pt: São Paulo
+    region: southeast
+    internal_rate: "0.18"
+    source: "Lei nº 6.374/1989, art. 34, I, as amended by Lei nº 13.230/2008, from 1 January 2009."
+  - uf: SE
+    name_en: Sergipe
+    name_pt: Sergipe
+    region: northeast
+    internal_rate: "0.19"
+    source: "Lei nº 3.796/1996, art. 18, I, 'j', as amended by Lei nº 9.176/2023, from 1 April 2023."
+    generalized_surcharge:
+      code: fecoep
+      rate: "0.01"
+      source: "Lei nº 9.176/2023. The state poverty fund adds one point on almost every internal operation, so the usual internal burden is 20%."
+  - uf: TO
+    name_en: Tocantins
+    name_pt: Tocantins
+    region: north
+    internal_rate: "0.20"
+    source: "Lei nº 1.287/2001, art. 27, II, as amended by Lei nº 4.141/2023, from 1 April 2023."

@@ -1,0 +1,10 @@
+[Unit]
+Description=Keep the IVA site attached across finance deploys
+
+[Timer]
+OnBootSec=45s
+OnUnitActiveSec=2min
+AccuracySec=15s
+
+[Install]
+WantedBy=timers.target

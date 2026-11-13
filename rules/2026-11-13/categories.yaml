@@ -1,0 +1,117 @@
+# Short categories, not an NCM/NBS table. A reduction is the share of the CBS
+# and IBS rate that is removed (LC 214/2025). 0.60 means the rate is cut by
+# 60%, so 40% of the reference remains. Reductions also apply to the 2026 and
+# 2027-2028 statutory test rates (arts. 344, 347 and 348).
+#
+# IPI is not given a rate. TIPI rates are NCM-specific, and these categories
+# are not NCM codes. The engine still accepts an ipi_rate when a future
+# ruleset sets one. IPI ends on 1 January 2027 except for goods that compete
+# with the Manaus Free Zone (EC 132/2023); that residue is not modelled.
+categories:
+  - id: standard_goods
+    supply: goods
+    name_en: Standard goods
+    name_pt: Mercadoria em geral
+    summary_en: Full CBS and IBS. Modal ICMS. No selective tax.
+    summary_pt: CBS e IBS sem redução. ICMS pela alíquota interna geral. Sem Imposto Seletivo.
+    cbs_ibs_reduction: "0"
+    reduction_source: "LC 214/2025, general regime (no reduction under arts. 125 to 146)."
+  - id: basic_food_basket
+    supply: goods
+    name_en: National basic food basket
+    name_pt: Cesta básica nacional
+    summary_en: CBS and IBS at zero. The state may still charge a reduced ICMS on food; this version keeps the modal rate.
+    summary_pt: CBS e IBS zerados. O Estado pode reduzir o ICMS de alimentos; esta versão mantém a alíquota interna geral.
+    cbs_ibs_reduction: "1"
+    reduction_source: "LC 214/2025, art. 125, and Annex I (national basic food basket, EC 132/2023, art. 8)."
+  - id: food_reduced
+    supply: goods
+    name_en: Food at the 60% reduction
+    name_pt: Alimentos com redução de 60%
+    summary_en: Human food listed in Annex VII. Not the zero-rated basic basket.
+    summary_pt: Alimentos para consumo humano do Anexo VII. Não é a cesta básica, de alíquota zero.
+    cbs_ibs_reduction: "0.60"
+    reduction_source: "LC 214/2025, arts. 128, VI, and 135, Annex VII."
+  - id: medicines
+    supply: goods
+    name_en: Medicines at the 60% reduction
+    name_pt: Medicamentos com redução de 60%
+    summary_en: Anvisa-registered medicines, other than those on the zero-rated list.
+    summary_pt: Medicamentos registrados na Anvisa, fora da lista de alíquota zero.
+    cbs_ibs_reduction: "0.60"
+    reduction_source: "LC 214/2025, arts. 128, V, and 133. Art. 146 zero-rates a separate list, which is not this category."
+  - id: general_services
+    supply: services
+    name_en: General services
+    name_pt: Serviços em geral
+    summary_en: Full CBS and IBS, plus a 5% ISS scenario rate.
+    summary_pt: CBS e IBS sem redução, com ISS de 5% como premissa.
+    cbs_ibs_reduction: "0"
+    reduction_source: "LC 214/2025, general regime."
+    iss_scenario_rate: "0.05"
+    iss_source: "Lei Complementar nº 116/2003, art. 8º, § 1º, sets a 2% floor. Municipalities set the rate inside a 2% to 5% band. 5% is a scenario at the top of that band, not the rate of a named city."
+  - id: professional_services
+    supply: services
+    name_en: Regulated professional services
+    name_pt: Serviços de profissionais regulamentados
+    summary_en: The 30% reduction for listed intellectual professions, including lawyers, under the conditions of art. 127.
+    summary_pt: Redução de 30% para as profissões do art. 127, inclusive a advocacia, quando as condições do artigo estão cumpridas.
+    cbs_ibs_reduction: "0.30"
+    reduction_source: "LC 214/2025, art. 127. The reduction depends on the professional and corporate conditions in that article; this category assumes they are met."
+    iss_scenario_rate: "0.05"
+    iss_source: "Lei Complementar nº 116/2003, art. 8º, § 1º. 5% is a scenario at the top of the 2% to 5% municipal band, not the rate of a named city."
+  - id: education_services
+    supply: services
+    name_en: Education services
+    name_pt: Serviços de educação
+    summary_en: The 60% reduction for education services listed in Annex II.
+    summary_pt: Redução de 60% para os serviços de educação do Anexo II.
+    cbs_ibs_reduction: "0.60"
+    reduction_source: "LC 214/2025, arts. 128, I, and 129, Annex II. The reduction covers the listed tuition, not every supply a school makes."
+    iss_scenario_rate: "0.05"
+    iss_source: "Lei Complementar nº 116/2003, art. 8º, § 1º. 5% is a scenario at the top of the 2% to 5% municipal band, not the rate of a named city."
+  - id: sugary_drinks
+    supply: goods
+    name_en: Sugary drinks
+    name_pt: Bebidas açucaradas
+    summary_en: NCM 2202.10.00. Selective tax at the 2027 final rate of 2.6%.
+    summary_pt: NCM 2202.10.00. Imposto Seletivo de 2,6% em 2027.
+    cbs_ibs_reduction: "0"
+    reduction_source: "LC 214/2025, general regime. These drinks are not in the food reduction."
+    selective:
+      ad_valorem: "0.026"
+      source: "Medida Provisória nº 1.399/2026, Annex IV: sugary drinks of NCM 2202.10.00, final rate 2.6%. The provisional measure sets the 2027 rates."
+  - id: beer
+    supply: goods
+    name_en: Beer
+    name_pt: Cerveja
+    summary_en: Malt beer, NCM heading 22.03. Selective tax at the 2027 final rate of 4.2%.
+    summary_pt: Cerveja de malte, posição 22.03. Imposto Seletivo de 4,2% em 2027.
+    cbs_ibs_reduction: "0"
+    reduction_source: "LC 214/2025, general regime."
+    selective:
+      ad_valorem: "0.042"
+      source: "Medida Provisória nº 1.399/2026, Annex IV: malt beer of heading 22.03, initial rate 3.9% times conversion factor 1.07, final rate 4.2%."
+  - id: spirits
+    supply: goods
+    name_en: Spirits
+    name_pt: Destilados
+    summary_en: Other alcoholic drinks of NCM heading 22.08, including cachaça from molasses. Selective tax at the 2027 final rate of 24%.
+    summary_pt: Demais bebidas da posição 22.08, inclusive cachaça de melaço. Imposto Seletivo de 24% em 2027.
+    cbs_ibs_reduction: "0"
+    reduction_source: "LC 214/2025, general regime."
+    selective:
+      ad_valorem: "0.24"
+      source: "Medida Provisória nº 1.399/2026, Annex IV: other drinks of heading 22.08, initial rate 19.5% times conversion factor 1.23, final rate 24%."
+  - id: passenger_cars
+    supply: goods
+    name_en: Passenger cars
+    name_pt: Automóveis de passageiros
+    summary_en: NCM heading 87.03, before the per-vehicle sustainability adjustments.
+    summary_pt: Posição 87.03, antes dos ajustes de sustentabilidade de cada veículo.
+    cbs_ibs_reduction: "0"
+    reduction_source: "LC 214/2025, general regime."
+    selective:
+      ad_valorem_base: "0.063"
+      conversion_factor: "1.21"
+      source: "Medida Provisória nº 1.399/2026, Annexes I and V: passenger cars of heading 87.03, base rate 6.3% times conversion factor 1.21. Annexes II and III then add or subtract points for powertrain, efficiency, power, safety and recyclability. Those adjustments are not applied, because they depend on the vehicle."

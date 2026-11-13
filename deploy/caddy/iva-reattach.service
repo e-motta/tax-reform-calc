@@ -1,0 +1,9 @@
+[Unit]
+Description=Reattach the IVA site to the finance Caddy
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/caddy/reattach-iva.sh
+User=ubuntu

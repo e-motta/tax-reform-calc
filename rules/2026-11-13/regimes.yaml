@@ -1,0 +1,36 @@
+# PIS/COFINS rates still in force through 2026. Both are extinguished on
+# 1 January 2027 (EC 132/2023 and LC 214/2025). Lucro Real is modelled on the
+# non-cumulative rates; Lucro Presumido on the cumulative rates. Exceptions
+# inside each regime are not modelled.
+icms_excluded_from_pis_cofins_base: true
+icms_exclusion_source: >-
+  STF, RE 574.706 (Tema 69): the ICMS does not form part of the PIS/COFINS
+  calculation base.
+iss_excluded_from_pis_cofins_base: true
+iss_exclusion_source: >-
+  STF, RE 592.616 (Tema 118), merits judged on 21 October 2026: the ISS does
+  not form part of the PIS/COFINS calculation base. Effects had not been
+  modulated when this ruleset was written.
+
+regimes:
+  lucro_real:
+    supported: true
+    cumulative: false
+    pis: "0.0165"
+    cofins: "0.076"
+    source: "Lei nº 10.637/2002, art. 2º (PIS 1.65%); Lei nº 10.833/2003, art. 2º (COFINS 7.6%)."
+  lucro_presumido:
+    supported: true
+    cumulative: true
+    pis: "0.0065"
+    cofins: "0.03"
+    source: "Lei nº 9.718/1998, art. 8º (COFINS 3%); Lei nº 10.637/2002, art. 8º (PIS 0.65% for persons outside the non-cumulative regime)."
+  simples:
+    supported: false
+    cumulative: null
+    pis: null
+    cofins: null
+    source: >-
+      Lei Complementar nº 123/2006. The unified Simples schedule is not in
+      this version. LC 214/2025, art. 348, III, "c", also keeps the 2026 CBS
+      and IBS test rates off Simples taxpayers.
