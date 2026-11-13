@@ -31,6 +31,19 @@ def test_rules_catalogue_is_bilingual_and_marks_simples():
     assert regimes["simples"]["supported"] is False
 
 
+def test_rules_exposes_iss_scenario_rate_for_service_categories():
+    """Service categories expose iss_scenario_rate; goods categories have it null."""
+    response = client.get("/api/rules")
+    assert response.status_code == 200
+    body = response.json()
+    categories = {item["id"]: item for item in body["categories"]}
+    assert categories["general_services"]["iss_scenario_rate"] == "0.05"
+    assert categories["professional_services"]["iss_scenario_rate"] == "0.05"
+    assert categories["education_services"]["iss_scenario_rate"] == "0.05"
+    assert categories["standard_goods"]["iss_scenario_rate"] is None
+    assert categories["basic_food_basket"]["iss_scenario_rate"] is None
+
+
 def test_calculate_returns_the_transition(rules_payload=None):
     response = client.post(
         "/api/calculate",

@@ -56,6 +56,7 @@ def read_rules(request: Request) -> RulesOut:
                 summary_pt=item.summary_pt,
                 cbs_ibs_reduction=item.cbs_ibs_reduction,
                 selective=item.selective is not None,
+                iss_scenario_rate=item.iss_scenario_rate,
             )
             for item in rules.categories.categories
         ],
