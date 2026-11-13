@@ -6,7 +6,7 @@
     <title>IVA transition</title>
     <meta
       name="description"
-      content="Compare ICMS, PIS and COFINS with CBS, IBS and the selective tax, year by year from 2026 to 2033."
+      content="Compare ICMS, ISS, PIS and COFINS with CBS, IBS and the selective tax, year by year from 2026 to 2033."
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,6 +33,7 @@
     <h1 class="lockup">
       <span class="chips">
         <span class="chip">ICMS</span>
+        <span class="chip">ISS</span>
         <span class="chip">PIS</span>
         <span class="chip">COFINS</span>
       </span>
@@ -73,6 +74,11 @@
           <label for="price" id="label-price"></label>
           <input id="price" name="price" type="number" inputmode="decimal" min="0.01" step="0.01" value="1000" required />
           <p class="hint" id="price-hint"></p>
+        </div>
+        <div class="field" id="iss-field" hidden>
+          <label for="iss-rate" id="label-iss-rate"></label>
+          <input id="iss-rate" name="iss_rate" type="text" inputmode="decimal" />
+          <p class="hint" id="iss-rate-hint"></p>
         </div>
         <button type="submit" class="go" id="submit"></button>
         <p class="form-error" id="form-error" hidden></p>

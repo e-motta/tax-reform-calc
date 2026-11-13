@@ -91,6 +91,7 @@ def calculate(request: CalculationRequest, rules: RuleSet) -> CalculationResult:
     if regime is None or not regime.supported:
         raise RegimeNotSupportedError(request.regime)
 
+    iss_base_rate = _resolve_iss_rate(request.iss_rate, category)
     net = request.price.quantize(CENT, rounding=ROUND_HALF_UP)
     interstate_rate = _interstate_rate(request.origin_uf, request.destination_uf, rules)
     disclosure = estimates_disclosure(rules)
@@ -101,6 +102,7 @@ def calculate(request: CalculationRequest, rules: RuleSet) -> CalculationResult:
         destination=destination,
         regime=regime,
         interstate_nominal=interstate_rate,
+        iss_base_rate=iss_base_rate,
         year=None,
         spec=None,
         rules=rules,
@@ -113,6 +115,7 @@ def calculate(request: CalculationRequest, rules: RuleSet) -> CalculationResult:
             destination=destination,
             regime=regime,
             interstate_nominal=interstate_rate,
+            iss_base_rate=iss_base_rate,
             year=spec.year,
             spec=spec,
             rules=rules,
@@ -131,10 +134,23 @@ def calculate(request: CalculationRequest, rules: RuleSet) -> CalculationResult:
         interstate=interstate_rate is not None,
         interstate_rate=interstate_rate,
         estimates=disclosure,
-        assumptions=_assumptions(category, rules),
+        assumptions=_assumptions(
+            category, rules, custom_iss=request.iss_rate is not None
+        ),
         baseline=baseline,
         years=years,
     )
+
+
+def _resolve_iss_rate(
+    custom_rate: Decimal | None, category: Category
+) -> Decimal | None:
+    """Return the ISS rate to use: custom if provided, else the category default."""
+    if category.supply != "services":
+        return None
+    if custom_rate is not None:
+        return custom_rate
+    return category.iss_scenario_rate
 
 
 def estimates_disclosure(rules: RuleSet) -> EstimateDisclosure:
@@ -155,7 +171,9 @@ def estimates_disclosure(rules: RuleSet) -> EstimateDisclosure:
     )
 
 
-def _assumptions(category: Category, rules: RuleSet) -> list[str]:
+def _assumptions(
+    category: Category, rules: RuleSet, *, custom_iss: bool = False
+) -> list[str]:
     codes = [
         "price_is_net",
         "final_consumer",
@@ -170,9 +188,12 @@ def _assumptions(category: Category, rules: RuleSet) -> list[str]:
     if category.supply == "goods":
         codes.extend(["modal_icms", "fcp_only_when_general", "icms_excluded"])
     else:
+        if custom_iss:
+            codes.append("iss_custom")
+        else:
+            codes.append("iss_scenario")
         codes.extend(
             [
-                "iss_scenario",
                 "iss_excluded",
                 "iss_modulation_open",
                 "states_do_not_change_services",
@@ -197,6 +218,7 @@ def _year(
     destination: StateRate,
     regime: Regime,
     interstate_nominal: Decimal | None,
+    iss_base_rate: Decimal | None,
     year: int | None,
     spec: TransitionYear | None,
     rules: RuleSet,
@@ -220,7 +242,7 @@ def _year(
         )
         lines.extend(goods_lines)
     else:
-        iss_rate = (category.iss_scenario_rate or ZERO) * factor
+        iss_rate = (iss_base_rate or ZERO) * factor
         invoice, service_lines = _service_invoice(
             net=net,
             iss_rate=iss_rate,

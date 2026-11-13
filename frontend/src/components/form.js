@@ -22,6 +22,7 @@ export function fillSelects() {
   })));
   const current = state.catalogue.categories.find((item) => item.id === $("category").value);
   $("category-hint").textContent = current ? current[summary] : "";
+  updateIssFieldVisibility();
 }
 
 function keepSelect(select, options) {
@@ -50,17 +51,70 @@ export function initCategoryHint() {
     const summary = state.lang === "pt" ? "summary_pt" : "summary_en";
     const current = state.catalogue.categories.find((item) => item.id === $("category").value);
     $("category-hint").textContent = current ? current[summary] : "";
+    updateIssFieldVisibility();
   });
 }
 
+function updateIssFieldVisibility() {
+  const current = state.catalogue?.categories.find((item) => item.id === $("category").value);
+  const isService = current?.supply === "services";
+  const issField = $("iss-field");
+  const issInput = $("iss-rate");
+  if (isService) {
+    issField.hidden = false;
+    if (!issInput.value) {
+      const defaultRate = current.iss_scenario_rate || "0.05";
+      const pct = (Number(defaultRate) * 100).toFixed(0);
+      issInput.value = state.lang === "pt" ? pct.replace(".", ",") : pct;
+    }
+  } else {
+    issField.hidden = true;
+    issInput.value = "";
+  }
+}
+
+export function applyIssLabels() {
+  const text = t(state.lang);
+  $("label-iss-rate").textContent = text.issRate;
+  $("iss-rate-hint").textContent = text.issRateHint;
+}
+
+function parseIssRate() {
+  const input = $("iss-rate").value.trim();
+  if (!input) return null;
+  const normalized = input.replace(",", ".");
+  const pct = parseFloat(normalized);
+  if (isNaN(pct)) return null;
+  return pct / 100;
+}
+
+export function validateIssRate() {
+  const current = state.catalogue?.categories.find((item) => item.id === $("category").value);
+  if (current?.supply !== "services") return { valid: true, rate: null };
+  const rate = parseIssRate();
+  if (rate === null) {
+    const current = state.catalogue?.categories.find((item) => item.id === $("category").value);
+    return { valid: true, rate: current?.iss_scenario_rate || null };
+  }
+  if (rate < 0.02 || rate > 0.05) {
+    return { valid: false, rate: null };
+  }
+  return { valid: true, rate: String(rate) };
+}
+
 export function getFormValues() {
-  return {
+  const values = {
     category_id: $("category").value,
     origin_uf: $("origin").value,
     destination_uf: $("destination").value,
     regime: $("regime").value,
     price: $("price").value,
   };
+  const issValidation = validateIssRate();
+  if (issValidation.rate !== null) {
+    values.iss_rate = issValidation.rate;
+  }
+  return values;
 }
 
 export function showFormError(message) {

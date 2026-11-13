@@ -81,3 +81,122 @@ def test_ui_is_served_from_the_same_origin():
     assert response.status_code == 200
     assert "text/html" in response.headers["content-type"]
     assert "IVA" in response.text
+
+
+def test_custom_iss_rate_minimum():
+    """Custom ISS rate of 2% (the minimum) should work for services."""
+    response = client.post(
+        "/api/calculate",
+        json={
+            "category_id": "general_services",
+            "origin_uf": "SP",
+            "destination_uf": "SP",
+            "regime": "lucro_real",
+            "price": "1000",
+            "iss_rate": "0.02",
+        },
+    )
+    assert response.status_code == 200
+    body = response.json()
+    baseline_iss = next(
+        line for line in body["baseline"]["lines"] if line["code"] == "iss"
+    )
+    assert baseline_iss["rate"] == "0.02"
+    assert "iss_custom" in body["assumptions"]
+    assert "iss_scenario" not in body["assumptions"]
+
+
+def test_custom_iss_rate_mid_range():
+    """Custom ISS rate of 3.5% should work for services."""
+    response = client.post(
+        "/api/calculate",
+        json={
+            "category_id": "general_services",
+            "origin_uf": "SP",
+            "destination_uf": "SP",
+            "regime": "lucro_real",
+            "price": "1000",
+            "iss_rate": "0.035",
+        },
+    )
+    assert response.status_code == 200
+    body = response.json()
+    baseline_iss = next(
+        line for line in body["baseline"]["lines"] if line["code"] == "iss"
+    )
+    assert baseline_iss["rate"] == "0.035"
+
+
+def test_iss_rate_below_minimum_rejected():
+    """ISS rate below 2% should be rejected with 422."""
+    response = client.post(
+        "/api/calculate",
+        json={
+            "category_id": "general_services",
+            "origin_uf": "SP",
+            "destination_uf": "SP",
+            "regime": "lucro_real",
+            "price": "1000",
+            "iss_rate": "0.01",
+        },
+    )
+    assert response.status_code == 422
+
+
+def test_iss_rate_above_maximum_rejected():
+    """ISS rate above 5% should be rejected with 422."""
+    response = client.post(
+        "/api/calculate",
+        json={
+            "category_id": "general_services",
+            "origin_uf": "SP",
+            "destination_uf": "SP",
+            "regime": "lucro_real",
+            "price": "1000",
+            "iss_rate": "0.06",
+        },
+    )
+    assert response.status_code == 422
+
+
+def test_default_iss_rate_unchanged():
+    """When no iss_rate is provided, the default 5% scenario rate is used."""
+    response = client.post(
+        "/api/calculate",
+        json={
+            "category_id": "general_services",
+            "origin_uf": "SP",
+            "destination_uf": "SP",
+            "regime": "lucro_real",
+            "price": "1000",
+        },
+    )
+    assert response.status_code == 200
+    body = response.json()
+    baseline_iss = next(
+        line for line in body["baseline"]["lines"] if line["code"] == "iss"
+    )
+    assert baseline_iss["rate"] == "0.05"
+    assert "iss_scenario" in body["assumptions"]
+    assert "iss_custom" not in body["assumptions"]
+
+
+def test_iss_rate_ignored_for_goods():
+    """ISS rate should be ignored for goods categories."""
+    response = client.post(
+        "/api/calculate",
+        json={
+            "category_id": "standard_goods",
+            "origin_uf": "SP",
+            "destination_uf": "SP",
+            "regime": "lucro_real",
+            "price": "1000",
+            "iss_rate": "0.03",
+        },
+    )
+    assert response.status_code == 200
+    body = response.json()
+    iss_lines = [line for line in body["baseline"]["lines"] if line["code"] == "iss"]
+    assert len(iss_lines) == 0
+    assert "iss_scenario" not in body["assumptions"]
+    assert "iss_custom" not in body["assumptions"]
