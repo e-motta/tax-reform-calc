@@ -1,0 +1,26 @@
+# Local run: docker compose up --build
+# The UI and the API are the same process, on http://127.0.0.1:8000
+# Production adds docker-compose.production.yml. See docs/deploy-oci.md.
+
+name: iva
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      APP_ENV: local
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health')",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

@@ -1,0 +1,26 @@
+# Production override. Use scripts/deploy.py, not bare docker compose.
+#
+# This stack does not bind 80 or 443 and does not run Caddy. The finance
+# app's Caddy already owns those ports on the VM. This service joins the
+# external network `edge` so that Caddy can proxy iva.eduardomotta.dev
+# to the container name iva-app.
+
+services:
+  app:
+    image: ghcr.io/e-motta/tax-reform-calc:${APP_IMAGE_TAG:-latest}
+    container_name: iva-app
+    environment:
+      APP_ENV: production
+    networks:
+      - default
+      - edge
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  edge:
+    external: true
+    name: edge

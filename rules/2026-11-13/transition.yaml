@@ -1,0 +1,157 @@
+# Year-by-year transition. Statutory rates are stored here. Reference-rate
+# years point at manifest.estimates and are marked estimated by the engine.
+#
+# ICMS and ISS: LC 214/2025, art. 501 (new art. 31-A of LC 87/1996) and art. 508
+# (new art. 8º-B of LC 116/2003). Rates in force on 31 December 2028 are reduced
+# by 10% in 2029, 20% in 2030, 30% in 2031 and 40% in 2032, including the
+# interstate rates of Senate Resolutions 22/1989 and 13/2012. Both taxes are
+# extinguished in 2033.
+#
+# The IBS fractions from 2029 are the revenue-replacement slices in LC 214/2025,
+# arts. 361 to 365 (10%, 20%, 30%, 40%, then the full reference in 2033). Applying
+# those slices to a single estimated full reference rate is a projection: the
+# Senate fixes each year's reference rate only in the previous year (art. 349).
+years:
+  - year: 2026
+    pis_cofins: true
+    ipi: true
+    icms_iss_factor: "1"
+    selective: false
+    offset_test_tax_against_pis_cofins: true
+    cbs:
+      mode: statutory
+      rate: "0.009"
+    ibs:
+      mode: statutory
+      state: "0.001"
+      municipal: "0"
+    source: >-
+      LC 214/2025, arts. 343, 346 and 348. IBS is a state rate of 0.1% only.
+      CBS is 0.9%. Amounts actually collected are offset against PIS/COFINS,
+      and collection is waived for taxpayers who meet the accessory obligations
+      (art. 348, § 1º), while PIS/COFINS stay due in full (§ 2º). There is no
+      extra burden.
+    source_pt: >-
+      LC 214/2025, arts. 343, 346 e 348. O IBS é só a alíquota estadual de 0,1%.
+      A CBS é de 0,9%. O que for arrecadado compensa PIS/COFINS, e a cobrança é
+      dispensada para quem cumprir as obrigações acessórias (art. 348, § 1º),
+      enquanto o PIS e a COFINS seguem devidos por inteiro (§ 2º). Não há carga
+      extra.
+  - year: 2027
+    pis_cofins: false
+    ipi: false
+    icms_iss_factor: "1"
+    selective: true
+    offset_test_tax_against_pis_cofins: false
+    cbs:
+      mode: reference_minus_points
+      points: "0.001"
+    ibs:
+      mode: statutory
+      state: "0.0005"
+      municipal: "0.0005"
+    source: >-
+      LC 214/2025, arts. 344 and 347. PIS, COFINS and IPI are extinguished
+      (IPI remains only for goods that compete with the Manaus Free Zone, which
+      this ruleset does not model). CBS is the reference rate minus 0.1
+      percentage point. IBS is 0.05% state plus 0.05% municipal. The selective
+      tax starts.
+    source_pt: >-
+      LC 214/2025, arts. 344 e 347. PIS, COFINS e IPI se extinguem (o IPI
+      permanece só para bens que concorrem com a Zona Franca de Manaus, o que
+      esta base não modela). A CBS é a alíquota de referência menos 0,1 ponto
+      percentual. O IBS é 0,05% estadual mais 0,05% municipal. Começa o
+      Imposto Seletivo.
+  - year: 2028
+    pis_cofins: false
+    ipi: false
+    icms_iss_factor: "1"
+    selective: true
+    offset_test_tax_against_pis_cofins: false
+    cbs:
+      mode: reference_minus_points
+      points: "0.001"
+    ibs:
+      mode: statutory
+      state: "0.0005"
+      municipal: "0.0005"
+    source: "LC 214/2025, arts. 344 and 347. Same statutory test rates as 2027."
+    source_pt: "LC 214/2025, arts. 344 e 347. Mesmas alíquotas-teste de 2027."
+  - year: 2029
+    pis_cofins: false
+    ipi: false
+    icms_iss_factor: "0.9"
+    selective: true
+    offset_test_tax_against_pis_cofins: false
+    cbs:
+      mode: reference
+    ibs:
+      mode: reference_fraction
+      fraction: "0.10"
+    source: >-
+      LC 214/2025, arts. 361, 501 and 508. ICMS and ISS at 90% of the rates in
+      force on 31 December 2028. CBS at the reference rate. IBS projected at
+      10% of the estimated full reference.
+    source_pt: >-
+      LC 214/2025, arts. 361, 501 e 508. ICMS e ISS a 90% das alíquotas vigentes
+      em 31 de dezembro de 2028. CBS na alíquota de referência. IBS projetado em
+      10% da referência plena estimada.
+  - year: 2030
+    pis_cofins: false
+    ipi: false
+    icms_iss_factor: "0.8"
+    selective: true
+    offset_test_tax_against_pis_cofins: false
+    cbs:
+      mode: reference
+    ibs:
+      mode: reference_fraction
+      fraction: "0.20"
+    source: "LC 214/2025, arts. 362, 501 and 508. ICMS and ISS at 80%. IBS projected at 20% of the estimated full reference."
+    source_pt: "LC 214/2025, arts. 362, 501 e 508. ICMS e ISS a 80%. IBS projetado em 20% da referência plena estimada."
+  - year: 2031
+    pis_cofins: false
+    ipi: false
+    icms_iss_factor: "0.7"
+    selective: true
+    offset_test_tax_against_pis_cofins: false
+    cbs:
+      mode: reference
+    ibs:
+      mode: reference_fraction
+      fraction: "0.30"
+    source: "LC 214/2025, arts. 363, 501 and 508. ICMS and ISS at 70%. IBS projected at 30% of the estimated full reference."
+    source_pt: "LC 214/2025, arts. 363, 501 e 508. ICMS e ISS a 70%. IBS projetado em 30% da referência plena estimada."
+  - year: 2032
+    pis_cofins: false
+    ipi: false
+    icms_iss_factor: "0.6"
+    selective: true
+    offset_test_tax_against_pis_cofins: false
+    cbs:
+      mode: reference
+    ibs:
+      mode: reference_fraction
+      fraction: "0.40"
+    source: "LC 214/2025, arts. 364, 501 and 508. ICMS and ISS at 60%. IBS projected at 40% of the estimated full reference."
+    source_pt: "LC 214/2025, arts. 364, 501 e 508. ICMS e ISS a 60%. IBS projetado em 40% da referência plena estimada."
+  - year: 2033
+    pis_cofins: false
+    ipi: false
+    icms_iss_factor: "0"
+    selective: true
+    offset_test_tax_against_pis_cofins: false
+    cbs:
+      mode: reference
+    ibs:
+      mode: reference_fraction
+      fraction: "1"
+    source: >-
+      LC 214/2025, art. 365, and EC 132/2023. ICMS and ISS are extinguished.
+      CBS and IBS at the full reference rates. From 2033 the art. 12, § 2º, V
+      exclusion of the old taxes is spent, because those taxes no longer exist.
+    source_pt: >-
+      LC 214/2025, art. 365, e EC 132/2023. ICMS e ISS extintos. CBS e IBS nas
+      alíquotas de referência plenas. A partir de 2033, a exclusão do art. 12,
+      § 2º, V, dos tributos antigos se esgota, porque esses tributos deixam de
+      existir.
