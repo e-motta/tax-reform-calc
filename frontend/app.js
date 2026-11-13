@@ -30,8 +30,6 @@ const copy = {
     total: "Total tax",
     estimate: "estimate",
     how: "How this number was built",
-    docs: "OpenAPI",
-    footer: "A comparison, not a filing. Rules are versioned YAML with a citation on each figure.",
     regimes: {
       lucro_real: "Lucro Real",
       lucro_presumido: "Lucro Presumido",
@@ -106,8 +104,6 @@ const copy = {
     total: "Total dos tributos",
     estimate: "estimativa",
     how: "Como o número foi calculado",
-    docs: "OpenAPI",
-    footer: "Comparação, não apuração. As regras estão em YAML versionado, com a fonte de cada número.",
     regimes: {
       lucro_real: "Lucro Real",
       lucro_presumido: "Lucro Presumido",
@@ -217,8 +213,6 @@ function applyChrome() {
   $("submit").textContent = text.submit;
   const waiting = $("waiting");
   if (waiting) waiting.textContent = state.result ? "" : text.waiting;
-  $("docs-link").textContent = text.docs;
-  $("footer-copy").textContent = text.footer;
   $("theme").textContent = state.theme === "dark" ? text.themeDark : text.themeLight;
   $("theme").setAttribute("aria-pressed", state.theme === "dark" ? "true" : "false");
   $("lang-switch").setAttribute("aria-label", text.lang);
