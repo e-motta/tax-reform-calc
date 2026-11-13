@@ -190,11 +190,18 @@ function points(delta) {
   }).format(Math.abs(delta) * 100);
 }
 
-function formatDate(iso) {
+function rulesAsOf(iso) {
   const [year, month, day] = iso.split("-").map(Number);
-  return new Intl.DateTimeFormat(locale(), { day: "numeric", month: "long", year: "numeric" }).format(
-    new Date(year, month - 1, day),
-  );
+  if (state.lang === "pt") {
+    const dd = String(day).padStart(2, "0");
+    const mm = String(month).padStart(2, "0");
+    return `${dd}/${mm}/${year}`;
+  }
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(year, month - 1, day));
 }
 
 function applyChrome() {
@@ -231,8 +238,18 @@ function applyChrome() {
     }),
   );
   if (state.catalogue) fillSelects();
+  if (state.catalogue) renderUpdated();
   if (state.catalogue) renderNotice();
   if (state.result) renderResult();
+}
+
+function renderUpdated() {
+  const node = $("asof");
+  const iso = state.catalogue.as_of;
+  node.hidden = false;
+  node.textContent = state.lang === "pt"
+    ? `Regras atualizadas em ${rulesAsOf(iso)}`
+    : `Rules updated ${rulesAsOf(iso)}`;
 }
 
 function fillSelects() {
@@ -272,7 +289,6 @@ function keepSelect(select, options) {
 
 function renderNotice() {
   const estimates = state.catalogue.estimates;
-  const asOf = formatDate(estimates.as_of);
   const cbs = pct(estimates.cbs_reference);
   const ibs = pct(estimates.ibs_reference);
   const combined = pct(estimates.combined_reference);
@@ -288,22 +304,24 @@ function renderNotice() {
   notice.replaceChildren();
   if (state.lang === "pt") {
     notice.append(
-      `As alíquotas de referência da CBS e do IBS são estimativas. Nesta versão, de ${asOf}: CBS ${cbs} e IBS ${ibs}, somadas ${combined}. `,
+      `As alíquotas de referência da CBS e do IBS ainda são estimativas. Esta simulação usa CBS de ${cbs} e IBS de ${ibs}, totalizando ${combined} (`,
     );
     notice.append(link);
-    notice.append(". O ");
+    notice.append("). Em 28 de outubro de 2026, o ");
     notice.append(tcuLink);
     notice.append(
-      ` calculou ${tcu} de CBS em 28 de outubro de 2026. O Senado ainda não a havia fixado, e esse percentual não entra no cálculo. O teto de revisão de ${cap} também não é a alíquota adotada.`,
+      ` calculou a CBS em ${tcu}, mas, como o Senado ainda não fixou a alíquota, esse percentual não foi incorporado ao cálculo. O teto de ${cap} previsto para a revisão das alíquotas também não corresponde à alíquota aplicada.`,
     );
   } else {
     notice.append(
-      `CBS and IBS reference rates are estimates, as of ${asOf} in this ruleset: CBS ${cbs} and IBS ${ibs}, combined ${combined}. `,
+      `The CBS and IBS reference rates are still estimates. This simulation uses a CBS rate of ${cbs} and an IBS rate of ${ibs}, totaling ${combined} (`,
     );
     notice.append(link);
-    notice.append(". The ");
+    notice.append("). On 28 October 2026, the ");
     notice.append(tcuLink);
-    notice.append(` calculated a CBS reference of ${tcu} on 28 October 2026. The Senate had not fixed it, and that figure is not used in the arithmetic. The statutory review cap of ${cap} is not the rate either.`);
+    notice.append(
+      ` calculated the CBS rate at ${tcu}, but the Senate has not set the rate, so that figure is not included in the calculation. The ${cap} cap provided for the rate review is not the rate applied here either.`,
+    );
   }
 }
 
@@ -462,6 +480,7 @@ async function loadCatalogue() {
     $("regime").value = "lucro_real";
     $("category").value = "standard_goods";
   }
+  renderUpdated();
   renderNotice();
 }
 
