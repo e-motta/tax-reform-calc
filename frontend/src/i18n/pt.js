@@ -1,6 +1,7 @@
 export const pt = {
   eyebrow: "Brasil · EC 132/2023 · LC 214/2025",
   pageTitle: "ICMS, PIS, COFINS → IVA",
+  intro: "O IVA dual é o modelo de tributação sobre o consumo criado pela Reforma Tributária (EC 132/2023 e LC 214/2025). Ele é formado pela CBS, federal, e pelo IBS, estadual e municipal, que substituem gradualmente ICMS, ISS, PIS e COFINS entre 2026 e 2033. Esta ferramenta compara a carga tributária atual de uma operação com a estimada sob o novo sistema, ano a ano ao longo da transição.",
   skip: "Ir para o resultado",
   lang: "Idioma",
   themeLight: "Escuro",
