@@ -8,7 +8,7 @@ Eduardo de Moraes, a tax lawyer who now works as a senior backend engineer, keep
 
 ## The page
 
-English is the default. Portuguese is a toggle, and so is a dark theme. The heading is the comparison: ICMS, PIS and COFINS as muted chips, then IVA, which is CBS plus IBS. The yellow note is the estimate disclosure: the date, the pair of rates the arithmetic uses, and the TCU figure it does not use.
+English is the default. Portuguese is a toggle, and so is a dark theme. The heading is the comparison: ICMS, PIS and COFINS as muted chips, then IVA, which is CBS plus IBS. A quiet line under the heading shows when the rules were last updated, from the same date the API reports. The yellow note states that the CBS and IBS reference rates are estimates, names the pair the arithmetic uses, and says the TCU figure is not used.
 
 Standard goods, São Paulo to São Paulo, Lucro Real, R$ 1,000 net.
 
