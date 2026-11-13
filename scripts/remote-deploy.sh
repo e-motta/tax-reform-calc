@@ -40,7 +40,7 @@ validate_tag() {
 
 get_app_container_id() {
     cd "$REPO_DIR"
-    docker compose "${COMPOSE_FILES[@]}" ps -q app 2>/dev/null || echo ""
+    docker compose "${COMPOSE_FILES[@]}" ps -q iva 2>/dev/null || echo ""
 }
 
 get_current_tag() {
@@ -62,6 +62,26 @@ get_container_health() {
     else
         echo "unknown"
     fi
+}
+
+check_network_aliases() {
+    log "Checking network aliases on edge network..."
+    local container_id aliases service_name
+    container_id=$(docker ps -qf name=iva-app | head -n 1)
+    if [[ -z "$container_id" ]]; then
+        log_error "Cannot find iva-app container"
+        return 1
+    fi
+    service_name=$(docker inspect --format='{{index .Config.Labels "com.docker.compose.service"}}' "$container_id" 2>/dev/null || echo "")
+    aliases=$(docker inspect --format='{{json .NetworkSettings.Networks.edge.Aliases}}' "$container_id" 2>/dev/null || echo "null")
+    log "Container aliases on edge: $aliases (service: $service_name)"
+    if echo "$aliases" | grep -qE '"app"'; then
+        log_error "FATAL: Container has generic alias 'app' on edge network!"
+        log_error "This collides with other services. The service must be named 'iva', not 'app'."
+        return 1
+    fi
+    log "Network alias check passed (no generic 'app' alias)"
+    return 0
 }
 
 health_check() {
@@ -169,6 +189,18 @@ do_deploy() {
         log_error "Deployment failed"
         if [[ -n "$previous_tag" && -n "$previous_commit" ]]; then
             rollback "$previous_tag" "$previous_commit" || log_error "Rollback also failed."
+        fi
+        exit 1
+    fi
+
+    if ! check_network_aliases; then
+        log_error "Network alias safety check failed"
+        if [[ -n "$previous_tag" && -n "$previous_commit" ]]; then
+            if rollback "$previous_tag" "$previous_commit"; then
+                log "Rollback successful after alias check failure"
+            else
+                log_error "Rollback also failed."
+            fi
         fi
         exit 1
     fi
