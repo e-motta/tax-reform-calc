@@ -105,6 +105,7 @@ class CategoryOut(BaseModel):
     summary_pt: str
     cbs_ibs_reduction: Decimal
     selective: bool
+    iss_scenario_rate: Decimal | None = None
 
 
 class StateOut(BaseModel):
