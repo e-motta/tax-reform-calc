@@ -15,6 +15,8 @@ export function applyChrome(onRender) {
   $("label-regime").textContent = text.regime;
   $("label-price").textContent = text.price;
   $("price-hint").textContent = text.priceHint;
+  $("label-iss-rate").textContent = text.issRate;
+  $("iss-rate-hint").textContent = text.issRateHint;
   $("submit").textContent = text.submit;
   const waiting = $("waiting");
   if (waiting) waiting.textContent = state.result ? "" : text.waiting;

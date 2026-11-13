@@ -3,7 +3,7 @@ import { t } from "./i18n/index.js";
 import { state } from "./state.js";
 import { fetchRules, calculate } from "./api/client.js";
 import { applyChrome, initThemeToggle } from "./components/chrome.js";
-import { fillSelects, setDefaultValues, initCategoryHint, getFormValues, showFormError, hideFormError } from "./components/form.js";
+import { fillSelects, setDefaultValues, initCategoryHint, getFormValues, validateIssRate, showFormError, hideFormError } from "./components/form.js";
 import { renderIntro } from "./components/intro.js";
 import { renderNotice } from "./components/notice.js";
 import { renderUpdated } from "./components/updated.js";
@@ -32,6 +32,12 @@ async function loadCatalogue() {
 async function submit(event) {
   event?.preventDefault();
   hideFormError();
+  const issValidation = validateIssRate();
+  if (!issValidation.valid) {
+    const text = t(state.lang);
+    showFormError(text.issRateError);
+    return;
+  }
   const { ok, body } = await calculate(getFormValues());
   if (!ok) {
     const detail = body.detail;

@@ -15,12 +15,17 @@ RegimeName = Literal["lucro_real", "lucro_presumido", "simples"]
 YearKind = Literal["baseline", "transition"]
 
 
+ISS_MIN = Decimal("0.02")
+ISS_MAX = Decimal("0.05")
+
+
 class CalculationRequest(BaseModel):
     category_id: str = Field(min_length=1, max_length=64)
     origin_uf: str = Field(min_length=2, max_length=2)
     destination_uf: str = Field(min_length=2, max_length=2)
     regime: RegimeName
     price: Decimal = Field(gt=0, le=Decimal("1000000000"))
+    iss_rate: Decimal | None = Field(default=None, ge=ISS_MIN, le=ISS_MAX)
 
     @field_validator("origin_uf", "destination_uf", mode="before")
     @classmethod
