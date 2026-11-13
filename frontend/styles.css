@@ -164,6 +164,14 @@ body {
   line-height: 1.3;
 }
 
+.intro {
+  max-width: 1080px;
+  margin: 0.9rem auto 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
 .tools { display: flex; gap: 0.5rem; align-items: center; }
 
 .segmented, .theme, select, input, .go {

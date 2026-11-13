@@ -1,6 +1,7 @@
 export const en = {
   eyebrow: "Brazil · EC 132/2023 · LC 214/2025",
   pageTitle: "ICMS, PIS, COFINS → IVA",
+  intro: "Dual VAT (IVA) is the consumption tax model created by Brazil's tax reform (Constitutional Amendment 132/2023 and Complementary Law 214/2025). It consists of the federal CBS and the state and municipal IBS, which gradually replace ICMS, ISS, PIS and COFINS between 2026 and 2033. This tool compares an operation's current tax burden with its estimated burden under the new system, year by year through the transition.",
   skip: "Skip to the result",
   lang: "Language",
   themeLight: "Dark",

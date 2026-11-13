@@ -4,12 +4,14 @@ import { state } from "./state.js";
 import { fetchRules, calculate } from "./api/client.js";
 import { applyChrome, initThemeToggle } from "./components/chrome.js";
 import { fillSelects, setDefaultValues, initCategoryHint, getFormValues, showFormError, hideFormError } from "./components/form.js";
+import { renderIntro } from "./components/intro.js";
 import { renderNotice } from "./components/notice.js";
 import { renderUpdated } from "./components/updated.js";
 import { renderResult } from "./components/results.js";
 
 function render() {
   applyChrome(render);
+  renderIntro();
   if (state.catalogue) fillSelects();
   if (state.catalogue) renderUpdated();
   if (state.catalogue) renderNotice();
