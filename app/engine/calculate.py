@@ -49,9 +49,10 @@ BASELINE_SOURCE = (
     "the 2026 column still carries beside the test taxes."
 )
 BASELINE_SOURCE_PT = (
-    "Sistema atual, antes do ano-teste da CBS e do IBS: ICMS modal cheio ou a "
-    "alíquota-cenário do ISS, mais PIS e COFINS. São as mesmas alíquotas "
-    "antigas que a coluna de 2026 ainda carrega ao lado dos tributos-teste."
+    "Sistema vigente, antes do ano de teste da CBS e do IBS: ICMS pela "
+    "alíquota interna geral, ou ISS na premissa de 5%, mais PIS e COFINS. "
+    "São as mesmas alíquotas que a coluna de 2026 ainda traz, ao lado dos "
+    "tributos de teste."
 )
 
 
@@ -84,7 +85,7 @@ def calculate(request: CalculationRequest, rules: RuleSet) -> CalculationResult:
         raise UnknownInputError(
             "unknown_state",
             f"Unknown state: {missing}.",
-            f"Unidade da Federação desconhecida: {missing}.",
+            f"UF desconhecida: {missing}.",
         )
     regime = rules.regime(request.regime)
     if regime is None or not regime.supported:

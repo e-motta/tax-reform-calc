@@ -18,14 +18,11 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <a class="skip" href="#result">Skip to the result</a>
+    <a class="skip" id="skip" href="#result">Skip to the result</a>
     <header class="top">
       <div class="brand">
         <p class="mark">IVA</p>
-        <div>
-          <p class="eyebrow" id="eyebrow"></p>
-          <h1 id="title"></h1>
-        </div>
+        <p class="eyebrow" id="eyebrow"></p>
       </div>
       <div class="tools">
         <div class="segmented" role="group" id="lang-switch"></div>
@@ -33,6 +30,20 @@
       </div>
     </header>
 
+    <h1 class="lockup">
+      <span class="chips">
+        <span class="chip">ICMS</span>
+        <span class="chip">PIS</span>
+        <span class="chip">COFINS</span>
+      </span>
+      <span class="iva-side">
+        <span class="arrow" aria-hidden="true">→</span>
+        <span class="iva">
+          <span class="iva-name">IVA</span>
+          <span class="iva-eq">CBS + IBS</span>
+        </span>
+      </span>
+    </h1>
     <p class="lede" id="lede"></p>
     <aside class="notice" id="notice"></aside>
 

@@ -109,9 +109,9 @@ def calculate_route(body: CalculationRequest, request: Request) -> CalculationRe
                 "2026 CBS and IBS test rates do not apply to Simples taxpayers."
             ),
             (
-                "O Simples Nacional não entra nesta versão. A tabela unificada "
-                "da Lei Complementar nº 123/2006 pede uma base própria, e as "
-                "alíquotas-teste de CBS e IBS de 2026 não se aplicam a optantes."
+                "O Simples Nacional fica de fora nesta versão. O regime da "
+                "LC nº 123/2006 tem tabela própria, e as alíquotas de teste "
+                "de CBS e IBS de 2026 não se aplicam ao optante."
             ),
         )
     except UnknownInputError as exc:

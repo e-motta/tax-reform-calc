@@ -32,11 +32,11 @@ years:
       (art. 348, § 1º), while PIS/COFINS stay due in full (§ 2º). There is no
       extra burden.
     source_pt: >-
-      LC 214/2025, arts. 343, 346 e 348. O IBS é só a alíquota estadual de 0,1%.
-      A CBS é de 0,9%. O que for arrecadado compensa PIS/COFINS, e a cobrança é
-      dispensada para quem cumprir as obrigações acessórias (art. 348, § 1º),
-      enquanto o PIS e a COFINS seguem devidos por inteiro (§ 2º). Não há carga
-      extra.
+      LC 214/2025, arts. 343, 346 e 348. Em 2026 o IBS é apenas a alíquota
+      estadual de 0,1% e a CBS é de 0,9%. O que for arrecadado compensa com o
+      PIS e a COFINS, e a cobrança fica dispensada para quem cumprir as
+      obrigações acessórias (art. 348, § 1º). O PIS e a COFINS seguem devidos
+      por inteiro (§ 2º). Não há acréscimo de carga.
   - year: 2027
     pis_cofins: false
     ipi: false
@@ -57,10 +57,10 @@ years:
       percentage point. IBS is 0.05% state plus 0.05% municipal. The selective
       tax starts.
     source_pt: >-
-      LC 214/2025, arts. 344 e 347. PIS, COFINS e IPI se extinguem (o IPI
-      permanece só para bens que concorrem com a Zona Franca de Manaus, o que
-      esta base não modela). A CBS é a alíquota de referência menos 0,1 ponto
-      percentual. O IBS é 0,05% estadual mais 0,05% municipal. Começa o
+      LC 214/2025, arts. 344 e 347. PIS, COFINS e IPI se extinguem. O IPI
+      permanece só para bens que concorrem com a Zona Franca de Manaus,
+      hipótese fora desta versão. A CBS é a alíquota de referência menos 0,1
+      ponto percentual. O IBS é 0,05% estadual e 0,05% municipal. Começa o
       Imposto Seletivo.
   - year: 2028
     pis_cofins: false
@@ -76,7 +76,7 @@ years:
       state: "0.0005"
       municipal: "0.0005"
     source: "LC 214/2025, arts. 344 and 347. Same statutory test rates as 2027."
-    source_pt: "LC 214/2025, arts. 344 e 347. Mesmas alíquotas-teste de 2027."
+    source_pt: "LC 214/2025, arts. 344 e 347. Mesmas alíquotas de teste de 2027."
   - year: 2029
     pis_cofins: false
     ipi: false
@@ -94,8 +94,8 @@ years:
       10% of the estimated full reference.
     source_pt: >-
       LC 214/2025, arts. 361, 501 e 508. ICMS e ISS a 90% das alíquotas vigentes
-      em 31 de dezembro de 2028. CBS na alíquota de referência. IBS projetado em
-      10% da referência plena estimada.
+      em 31 de dezembro de 2028. CBS na alíquota de referência. IBS estimado em
+      10% da alíquota cheia.
   - year: 2030
     pis_cofins: false
     ipi: false
@@ -108,7 +108,7 @@ years:
       mode: reference_fraction
       fraction: "0.20"
     source: "LC 214/2025, arts. 362, 501 and 508. ICMS and ISS at 80%. IBS projected at 20% of the estimated full reference."
-    source_pt: "LC 214/2025, arts. 362, 501 e 508. ICMS e ISS a 80%. IBS projetado em 20% da referência plena estimada."
+    source_pt: "LC 214/2025, arts. 362, 501 e 508. ICMS e ISS a 80%. IBS estimado em 20% da alíquota cheia."
   - year: 2031
     pis_cofins: false
     ipi: false
@@ -121,7 +121,7 @@ years:
       mode: reference_fraction
       fraction: "0.30"
     source: "LC 214/2025, arts. 363, 501 and 508. ICMS and ISS at 70%. IBS projected at 30% of the estimated full reference."
-    source_pt: "LC 214/2025, arts. 363, 501 e 508. ICMS e ISS a 70%. IBS projetado em 30% da referência plena estimada."
+    source_pt: "LC 214/2025, arts. 363, 501 e 508. ICMS e ISS a 70%. IBS estimado em 30% da alíquota cheia."
   - year: 2032
     pis_cofins: false
     ipi: false
@@ -134,7 +134,7 @@ years:
       mode: reference_fraction
       fraction: "0.40"
     source: "LC 214/2025, arts. 364, 501 and 508. ICMS and ISS at 60%. IBS projected at 40% of the estimated full reference."
-    source_pt: "LC 214/2025, arts. 364, 501 e 508. ICMS e ISS a 60%. IBS projetado em 40% da referência plena estimada."
+    source_pt: "LC 214/2025, arts. 364, 501 e 508. ICMS e ISS a 60%. IBS estimado em 40% da alíquota cheia."
   - year: 2033
     pis_cofins: false
     ipi: false
@@ -152,6 +152,5 @@ years:
       exclusion of the old taxes is spent, because those taxes no longer exist.
     source_pt: >-
       LC 214/2025, art. 365, e EC 132/2023. ICMS e ISS extintos. CBS e IBS nas
-      alíquotas de referência plenas. A partir de 2033, a exclusão do art. 12,
-      § 2º, V, dos tributos antigos se esgota, porque esses tributos deixam de
-      existir.
+      alíquotas de referência cheias. De 2033 em diante, a exclusão do art. 12,
+      § 2º, V, deixa de se aplicar, porque os tributos antigos já não existem.

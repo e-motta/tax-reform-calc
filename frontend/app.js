@@ -1,7 +1,8 @@
 const copy = {
   en: {
     eyebrow: "Brazil · EC 132/2023 · LC 214/2025",
-    title: "From ICMS, PIS and COFINS to the dual VAT",
+    pageTitle: "ICMS, PIS, COFINS → IVA",
+    skip: "Skip to the result",
     lede: "One supply, priced the way a supplier keeps it. The page grosses up today's taxes, then lays CBS, IBS and the selective tax on top, for every year of the transition.",
     lang: "Language",
     themeLight: "Dark",
@@ -77,47 +78,48 @@ const copy = {
   },
   pt: {
     eyebrow: "Brasil · EC 132/2023 · LC 214/2025",
-    title: "Do ICMS, do PIS e da COFINS ao IVA dual",
-    lede: "Uma operação, pelo valor que o fornecedor conserva. A página faz o gross-up dos tributos de hoje e acrescenta CBS, IBS e Imposto Seletivo, em cada ano da transição.",
+    pageTitle: "ICMS, PIS, COFINS → IVA",
+    skip: "Ir para o resultado",
+    lede: "Uma operação, pelo valor que fica com o fornecedor. Os tributos de hoje entram por dentro; CBS, IBS e Imposto Seletivo, por fora, em cada ano da transição.",
     lang: "Idioma",
     themeLight: "Escuro",
     themeDark: "Claro",
     category: "Categoria",
     origin: "Origem",
     destination: "Destino",
-    regime: "Regime",
-    price: "Preço líquido",
-    priceHint: "O que o fornecedor conserva antes dos tributos sobre o consumo, em reais.",
+    regime: "Regime tributário",
+    price: "Valor líquido",
+    priceHint: "O que fica com o fornecedor, antes dos tributos sobre o consumo.",
     submit: "Comparar",
-    waiting: "Escolha uma operação e compare.",
+    waiting: "Informe a operação e compare.",
     today: "Hoje",
     customer: "O adquirente paga",
-    nominal: "CBS + IBS nominais",
-    effective: "Efetiva sobre o preço pago",
-    ofWhich: "disso é tributo",
-    higher: "acima da carga de hoje",
-    lower: "abaixo da carga de hoje",
-    same: "a mesma carga de hoje",
+    nominal: "Alíquota nominal de CBS + IBS",
+    effective: "Carga efetiva sobre o preço pago",
+    ofWhich: "em tributos",
+    higher: "acima da de hoje",
+    lower: "abaixo da de hoje",
+    same: "igual à de hoje",
     delta: (year, direction, points) =>
-      `Em ${year}, a alíquota efetiva fica ${points} pontos percentuais ${direction}.`,
+      `Em ${year}, a carga efetiva fica ${points} pontos percentuais ${direction}.`,
     tax: "Tributo",
     rate: "Alíquota",
     amount: "Valor",
-    total: "Tributo total",
+    total: "Total dos tributos",
     estimate: "estimativa",
-    how: "Como este número foi feito",
+    how: "Como o número foi calculado",
     docs: "OpenAPI",
-    footer: "Uma comparação, não uma apuração. As regras são YAML versionado, com citação em cada número.",
+    footer: "Comparação, não apuração. As regras estão em YAML versionado, com a fonte de cada número.",
     regimes: {
       lucro_real: "Lucro Real",
       lucro_presumido: "Lucro Presumido",
-      simples: "Simples Nacional — ainda não suportado",
+      simples: "Simples Nacional — fora desta versão",
     },
     lines: {
       icms: "ICMS",
-      icms_interstate: "ICMS, parcela interestadual",
-      icms_difal: "ICMS, parcela do destino (DIFAL)",
-      fcp: "Adicional estadual",
+      icms_interstate: "ICMS interestadual",
+      icms_difal: "DIFAL",
+      fcp: "FCP",
       iss: "ISS",
       pis: "PIS",
       cofins: "COFINS",
@@ -130,25 +132,25 @@ const copy = {
       offset_2026: "Compensação de 2026 com PIS/COFINS",
     },
     assumptions: {
-      price_is_net: "O preço é o líquido do fornecedor, antes dos tributos sobre o consumo. Os tributos por dentro entram no gross-up; CBS, IBS e o Imposto Seletivo são por fora.",
-      final_consumer: "O adquirente é consumidor final. Na venda interestadual de mercadoria, incide o ICMS modal do destino: a alíquota interestadual fica na origem e a diferença é o DIFAL.",
-      no_input_credits: "É o débito de uma única operação. Não há crédito sobre compras, nem no PIS/COFINS não cumulativo nem no IVA novo.",
-      domestic_goods: "As mercadorias são nacionais. A alíquota interestadual de 4% dos bens importados não é aplicada.",
-      reference_rates_are_estimates: "A partir de 2027 a CBS, e a partir de 2029 o IBS, usam a estimativa de alíquota de referência. As alíquotas de 2026 e as de IBS de 2027 e 2028 são as alíquotas-teste da lei.",
-      tcu_rate_not_used: "A referência de CBS calculada pelo TCU aparece na nota e não entra na conta.",
-      ibs_phase_in_is_a_projection: "As fatias de 10%, 20%, 30% e 40% do IBS são as frações de substituição de receita da lei, aplicadas sobre uma única alíquota cheia estimada. O Senado fixa a referência de cada ano apenas no ano anterior.",
-      ipi_not_by_ncm: "Não há alíquota de IPI. A TIPI depende de NCM, e estas categorias não são NCM.",
-      ipi_zfm_not_modelled: "O IPI se extingue em 2027, salvo o resíduo dos bens que concorram com a Zona Franca de Manaus. Esse resíduo não é modelado.",
-      modal_icms: "O ICMS é a alíquota modal interna do estado, não a de um produto, combustível ou energia.",
-      fcp_only_when_general: "O adicional de combate à pobreza entra só onde faz parte da regra geral: Rio de Janeiro e Sergipe.",
-      icms_excluded: "O ICMS sai da base do PIS/COFINS, conforme o Tema 69 do STF (RE 574.706).",
-      iss_scenario: "O ISS é uma alíquota de cenário de 5%, o topo da faixa municipal de 2% a 5%. Não é a alíquota de um município nomeado.",
-      iss_excluded: "O ISS sai da base do PIS/COFINS, conforme o Tema 118 do STF (RE 592.616), julgado em 21 de outubro de 2026.",
-      iss_modulation_open: "O Supremo ainda não havia modulado os efeitos desse julgamento quando as regras foram escritas. O próprio PIS/COFINS se extingue em 2027.",
-      states_do_not_change_services: "Num serviço, os dois estados não mudam o número. O ISS aqui é a alíquota de cenário, não uma tabela municipal.",
-      basic_basket_keeps_modal_icms: "A cesta básica nacional tem CBS e IBS a zero. A redução estadual de ICMS sobre alimentos depende do produto e não é aplicada, então a coluna de hoje usa a alíquota modal.",
-      selective_holding_after_2027: "A Medida Provisória nº 1.399/2026 fixa o Imposto Seletivo para o ano-calendário de 2027. Os anos seguintes repetem essa alíquota como premissa de manutenção. A lei ainda exige um escalonamento, de 2029 a 2033, para bebidas e tabaco, e esse escalonamento não tem número.",
-      vehicle_adjustments_not_applied: "A alíquota do automóvel é a base de 6,3% vezes o fator de 1,21, antes dos ajustes de sustentabilidade, que dependem do veículo.",
+      price_is_net: "O valor informado é o que fica com o fornecedor, antes dos tributos sobre o consumo. ICMS, ISS, PIS e COFINS são calculados por dentro; CBS, IBS e Imposto Seletivo, por fora.",
+      final_consumer: "O adquirente é consumidor final. Na venda interestadual de mercadoria, o ICMS é o da alíquota interna do destino: a interestadual fica na origem e a diferença é o DIFAL.",
+      no_input_credits: "É o débito de uma única operação. Não se aproveitam créditos das entradas, nem no PIS/COFINS não cumulativo nem na CBS e no IBS.",
+      domestic_goods: "A mercadoria é tratada como nacional. A alíquota interestadual de 4% dos produtos importados não se aplica.",
+      reference_rates_are_estimates: "De 2027 em diante, a CBS usa a estimativa de alíquota de referência; o IBS, a partir de 2029. Em 2026, e no IBS de 2027 e 2028, valem as alíquotas de teste da lei.",
+      tcu_rate_not_used: "A alíquota de referência da CBS calculada pelo TCU aparece na nota e não entra no cálculo.",
+      ibs_phase_in_is_a_projection: "Os 10%, 20%, 30% e 40% do IBS são as frações da transição previstas na lei, aplicadas sobre uma única alíquota cheia estimada. O Senado só fixa a referência de cada ano no ano anterior.",
+      ipi_not_by_ncm: "Não há IPI nesta conta. A alíquota da TIPI depende do NCM, e estas categorias não são códigos NCM.",
+      ipi_zfm_not_modelled: "O IPI se extingue em 2027, exceto para os bens que concorrem com a Zona Franca de Manaus. Esse resíduo não entra nesta versão.",
+      modal_icms: "O ICMS usado é a alíquota interna geral do Estado, não a de um produto, de combustível ou de energia.",
+      fcp_only_when_general: "O adicional do fundo de combate à pobreza entra só onde integra a regra geral: Rio de Janeiro e Sergipe.",
+      icms_excluded: "O ICMS é excluído da base de cálculo do PIS e da COFINS, conforme o Tema 69 do STF (RE 574.706).",
+      iss_scenario: "O ISS entra como premissa de 5%, o teto da faixa municipal de 2% a 5%. Não é a alíquota de um município específico.",
+      iss_excluded: "O ISS é excluído da base de cálculo do PIS e da COFINS, conforme o Tema 118 do STF (RE 592.616), julgado em 21 de outubro de 2026.",
+      iss_modulation_open: "Na data desta versão, o STF ainda não havia modulado os efeitos desse julgamento. O PIS e a COFINS se extinguem em 2027.",
+      states_do_not_change_services: "Em serviço, a UF de origem e a de destino não mudam o resultado. O ISS aqui é a premissa de 5%, não a tabela de um município.",
+      basic_basket_keeps_modal_icms: "A cesta básica nacional tem alíquota zero de CBS e de IBS. Redução de ICMS sobre alimentos depende do produto e não entra nesta versão, então a coluna de hoje segue a alíquota interna geral.",
+      selective_holding_after_2027: "A MP nº 1.399/2026 fixa o Imposto Seletivo para o ano-calendário de 2027. Os anos seguintes mantêm essa alíquota. O escalonamento de 2029 a 2033, para bebidas e tabaco, ainda não tem número publicado.",
+      vehicle_adjustments_not_applied: "A alíquota do automóvel é a base de 6,3% multiplicada pelo fator 1,21, antes dos ajustes de sustentabilidade, que dependem de cada veículo.",
     },
   },
 };
@@ -205,8 +207,9 @@ function applyChrome() {
   const text = t();
   document.documentElement.lang = state.lang === "pt" ? "pt-BR" : "en";
   document.documentElement.dataset.theme = state.theme;
+  document.title = text.pageTitle;
+  $("skip").textContent = text.skip;
   $("eyebrow").textContent = text.eyebrow;
-  $("title").textContent = text.title;
   $("lede").textContent = text.lede;
   $("label-category").textContent = text.category;
   $("label-origin").textContent = text.origin;
@@ -294,12 +297,14 @@ function renderNotice() {
   notice.replaceChildren();
   if (state.lang === "pt") {
     notice.append(
-      `As alíquotas de referência da CBS e do IBS são estimativas, vigentes nesta base em ${asOf}: CBS ${cbs} e IBS ${ibs}, juntas ${combined}. `,
+      `As alíquotas de referência da CBS e do IBS são estimativas. Nesta versão, de ${asOf}: CBS ${cbs} e IBS ${ibs}, somadas ${combined}. `,
     );
     notice.append(link);
-    notice.append(`. O ${""}`);
+    notice.append(". O ");
     notice.append(tcuLink);
-    notice.append(` calculou ${tcu} para a CBS em 28 de outubro de 2026; o Senado ainda não a tinha fixado, e esse percentual não entra na conta. O teto legal de revisão de ${cap} também não é a alíquota usada.`);
+    notice.append(
+      ` calculou ${tcu} de CBS em 28 de outubro de 2026. O Senado ainda não a havia fixado, e esse percentual não entra no cálculo. O teto de revisão de ${cap} também não é a alíquota adotada.`,
+    );
   } else {
     notice.append(
       `CBS and IBS reference rates are estimates, as of ${asOf} in this ruleset: CBS ${cbs} and IBS ${ibs}, combined ${combined}. `,
@@ -520,6 +525,6 @@ loadCatalogue()
   .then(() => submit())
   .catch(() => {
     $("waiting").textContent = state.lang === "pt"
-      ? "As regras não carregaram."
+      ? "Não foi possível carregar as regras."
       : "The rules did not load.";
   });
